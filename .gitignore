@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+public
+.vscode
 
 # Editor directories and files
 .vscode/*
@@ -18,7 +20,17 @@ dist-ssr
 .idea
 .DS_Store
 *.suo
-*.ntvs*
+.ntvs
 *.njsproj
 *.sln
 *.sw?
+
+*vite-env.d.ts
+*index.html
+*package.json
+*package-lock.json
+*tsconfig.json
+*tsconfig.node.json
+*tsconfig.app.json
+*README.md
+*vite.config.ts
