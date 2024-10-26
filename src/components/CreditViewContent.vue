@@ -1,6 +1,7 @@
 <template>
     <div class="calculator-container">
       <h1>Simulador de Créditos</h1>
+      <br />
       <div class="content">
         <div class="credit-form">
           <div class="form-group">
@@ -54,11 +55,6 @@
               <option value="Anual">Anual</option>
             </select>
           </div>
-
-          <div>
-            <label for="share">Valor de la couta</label>
-          </div>
-  
           <button>Calcular</button>
         </div>
   
@@ -67,7 +63,7 @@
           <table>
             <thead>
               <tr>
-                <th>Mes</th>
+                <th>Plazo</th>
                 <th>Pago</th>
                 <th>Interés</th>
                 <th>Capital</th>
@@ -100,7 +96,7 @@
   }
   
   h1 {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-size: 2.5em;
   }
   
@@ -119,21 +115,21 @@
   .form-group select {
     width: 100%;
     padding: 8px;
-    font-size: 1.1em;
-    border-radius: 5px;
+    font-size: 14px;
+    border-radius: 4px;
     border: 1px solid #ddd;
     background-color: #ffffff;
-    color: #0a0a0a;
+    color: #3e3d3d;
   }
   
   button {
-    padding: 15px;
-    font-size: 1.2em;
-    background-color: #3e00f9;
-    color: white;
+    padding: 8px;
+    font-size: 1em;
+    background-color: #737171;
+    color: rgb(29, 29, 29);
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 70%;
     border-radius: 5px;
   }
   
@@ -159,7 +155,7 @@
   }
   
   th, td {
-    padding: 10px;
+    padding: 20px;
     text-align: center;
   }
   
@@ -169,4 +165,3 @@
     margin-bottom: 15px;
   }
   </style>
-  
