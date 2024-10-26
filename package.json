@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "material-icons": "^1.13.12",
+    "pinia": "^2.2.4",
     "vue": "^3.5.10"
   },
   "devDependencies": {
