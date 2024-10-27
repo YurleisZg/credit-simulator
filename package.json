@@ -11,7 +11,8 @@
   "dependencies": {
     "material-icons": "^1.13.12",
     "pinia": "^2.2.4",
-    "vue": "^3.5.10"
+    "vue": "^3.5.10",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
