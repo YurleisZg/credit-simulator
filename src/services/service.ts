@@ -93,7 +93,7 @@ function calcularAmortizacion(monto: number, plazo: number, tasaInteres: number)
       pago: pagoMensual,
       interes,
       capital,
-      saldo: Math.max(0, saldo) // Evitar números negativos al final
+      saldo: Math.max(0, saldo)
     });
   }
 
