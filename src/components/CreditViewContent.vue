@@ -16,13 +16,23 @@
         </div>
 
         <div class="form-group">
-          <label for="income">Ingreso anual:</label>
+          <label for="income">Ingreso anual:
+            <span v-if="solicitud.tipoCredito === 'hipotecario'" class="text-muted">mínimo $46,800,000 ($3,900,000 al mes)</span>
+            <span v-else-if="solicitud.tipoCredito === 'automotriz'" class="text-muted">mínimo 27,000,000 (2,600,000 al mes)</span>
+            <span v-else-if="solicitud.tipoCredito === 'libreInversion'" class="text-muted">mínimo $500,000 ()</span>
+            <span v-else-if="solicitud.tipoCredito === 'personal'" class="text-muted">mínimo $500,000 ()</span>
+          </label>
           <input type="number" min="0" id="income" v-model.number="solicitud.ingresoAnual" placeholder="Ingresa tu ingreso anual" class="form-control" @blur="touched.ingresoAnual = true" />
           <div v-if="touched.ingresoAnual && solicitud.ingresoAnual <= 0" class="text-danger">El ingreso anual debe ser mayor que cero.</div>
         </div>
 
         <div class="form-group">
-          <label for="amount">Monto a solicitar:</label>
+          <label for="amount">Monto a solicitar:
+            <span v-if="solicitud.tipoCredito === 'hipotecario'" class="text-muted">mínimo $50,000,000, máximo ingreso anual * 6</span>
+            <span v-else-if="solicitud.tipoCredito === 'automotriz'" class="text-muted">mínimo $5,000,000, máximo ingreso anual * 3</span>
+            <span v-else-if="solicitud.tipoCredito === 'libreInversion'" class="text-muted">mínimo $500,000, máximo ingreso anual * 1,5</span>
+            <span v-else-if="solicitud.tipoCredito === 'personal'" class="text-muted">mínimo $500,000</span>
+          </label>
           <input type="number" min="0" id="amount" v-model.number="solicitud.montoSolicitado" placeholder="Ingresa el monto solicitado" class="form-control" @blur="touched.montoSolicitado = true" />
           <div v-if="touched.montoSolicitado && solicitud.montoSolicitado <= 0" class="text-danger">El monto solicitado debe ser mayor que cero.</div>
         </div>
@@ -122,17 +132,17 @@ function descargarExcel() {
     const now = new Date();
     const options = {
       timeZone: 'America/Bogota',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
+      year: 'numeric' as 'numeric',
+      month: '2-digit' as '2-digit',
+      day: '2-digit' as '2-digit',
+      hour: '2-digit' as '2-digit',
+      minute: '2-digit' as '2-digit',
+      second: '2-digit' as '2-digit',
       hour12: false
     };
     const formatter = new Intl.DateTimeFormat('es-CO', options);
     const parts = formatter.formatToParts(now);
-    const dateObj = {};
+    const dateObj: Record<string, string> = {};
     for (const { type, value } of parts) {
       dateObj[type] = value;
     }

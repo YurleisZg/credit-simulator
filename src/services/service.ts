@@ -1,5 +1,3 @@
-// service.ts
-
 export interface SolicitudCredito {
   tipoCredito: string;
   ingresoAnual: number;
@@ -42,23 +40,34 @@ export function calcularCredito(solicitud: SolicitudCredito): RespuestaCredito {
   }
 
   // Verificación de montos permitidos según el tipo de crédito
-  let montoMaximo;
+  const ingresoMensual = ingresoAnual / 12;
+  let montoMinimo = 0;
+  let montoMaximo = 0;
+
   switch (tipoCredito) {
     case 'hipotecario':
-      montoMaximo = ingresoAnual * 6;
+      montoMinimo = 50000000; // Monto mínimo
+      montoMaximo = ingresoAnual * 6; // Límite
       break;
     case 'automotriz':
-      montoMaximo = ingresoAnual * 3;
+      montoMinimo = 5000000; // Monto mínimo
+      montoMaximo = ingresoAnual * 3; // Límite
       break;
     case 'libreInversion':
-      montoMaximo = ingresoAnual * 1.5;
+      montoMinimo = 1000000; // Monto mínimo
+      montoMaximo = ingresoAnual * 1.5; // Límite
       break;
     case 'personal':
-      montoMaximo = (ingresoAnual / 12) * 6;
+      montoMinimo = 500000; // Monto mínimo
+      montoMaximo = (ingresoMensual) * 6; // Límite
       break;
     default:
-      montoMaximo = 0;
-      break;
+      return { esAprobado: false, montoAprobado: 0, mensajeError: 'Tipo de crédito no válido.', tablaAmortizacion: [] };
+  }
+
+  // Validar montos solicitados
+  if (montoSolicitado < montoMinimo) {
+    return { esAprobado: false, montoAprobado: 0, mensajeError: `El monto solicitado debe ser al menos ${montoMinimo}.`, tablaAmortizacion: [] };
   }
 
   const esAprobado = montoSolicitado <= montoMaximo;
@@ -75,11 +84,14 @@ export function calcularCredito(solicitud: SolicitudCredito): RespuestaCredito {
   };
 }
 
+
 // Función de cálculo de amortización en base al plazo en meses
 function calcularAmortizacion(monto: number, plazo: number, tasaInteres: number) {
   const tasaMensual = tasaInteres / 100 / 12; // Tasa mensual
   const pagoMensual = monto * (tasaMensual / (1 - Math.pow(1 + tasaMensual, -plazo)));
   const tablaAmortizacion = [];
+
+
 
   let saldo = monto;
 
@@ -91,9 +103,9 @@ function calcularAmortizacion(monto: number, plazo: number, tasaInteres: number)
     tablaAmortizacion.push({
       plazo: i, // Mostrar el número de mes
       pago: pagoMensual,
-      interes,
-      capital,
-      saldo: Math.max(0, saldo) // Evitar números negativos al final
+      interes: interes,
+      capital: capital,
+      saldo: Math.max(0, saldo), // Evitar números negativos al final
     });
   }
 
