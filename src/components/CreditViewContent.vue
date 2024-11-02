@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-          <label for="interest">Tasa de Interés (%):</label>
+          <label for="interest">Tasa de Interés anual(%):</label>
           <input type="number" min="0" id="interest" v-model.number="solicitud.tasaInteres" placeholder="Ingresa la tasa de interés" class="form-control" @blur="touched.tasaInteres = true" />
           <div v-if="touched.tasaInteres && solicitud.tasaInteres <= 0" class="text-danger">La tasa de interés debe ser mayor que cero.</div>
         </div>
