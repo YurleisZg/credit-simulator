@@ -103,9 +103,9 @@ function calcularAmortizacion(monto: number, plazo: number, tasaInteres: number)
     tablaAmortizacion.push({
       plazo: i, // Mostrar el número de mes
       pago: pagoMensual,
-      interes: interes,
-      capital: capital,
-      saldo: Math.max(0, saldo), // Evitar números negativos al final
+      interes,
+      capital,
+      saldo: Math.max(0, saldo)
     });
   }
 
